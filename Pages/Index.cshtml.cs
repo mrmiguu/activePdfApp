@@ -38,11 +38,11 @@ namespace activePdfApp.Pages
 
             var imageFile = await SaveFile(Image);
             var pdf = $"{Image.Name()}.pdf";
-            var res = TK.ImageToPDF(imageFile, "wwwroot/" + pdf);
+            var res = TK.ImageToPDF(imageFile, $"wwwroot/uploads/{pdf}");
 
             Console.WriteLine($"TK.ImageToPDF = {res}");
 
-            PDF = pdf;
+            PDF = $"uploads/{pdf}";
 
             return Page();
         }
@@ -53,10 +53,10 @@ namespace activePdfApp.Pages
         {
             if (file.Length == 0) return "";
 
-            using (var fileStream = new FileStream("wwwroot/" + file.Name(), FileMode.Create))
+            using (var fileStream = new FileStream($"wwwroot/uploads/{file.Name()}", FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
-                return "wwwroot/" + file.Name();
+                return $"wwwroot/uploads/${file.Name()}";
             }
         }
     }
