@@ -1,0 +1,8 @@
+wwwroot/**/*.png
+wwwroot/**/*.png.pdf
+wwwroot/**/*.jpg
+wwwroot/**/*.jpg.pdf
+wwwroot/**/*.jpeg
+wwwroot/**/*.jpeg.pdf
+bin/**/*
+obj/**/*
