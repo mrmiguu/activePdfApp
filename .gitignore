@@ -1,8 +1,2 @@
-wwwroot/uploads/*.png
-wwwroot/uploads/*.png.pdf
-wwwroot/uploads/*.jpg
-wwwroot/uploads/*.jpg.pdf
-wwwroot/uploads/*.jpeg
-wwwroot/uploads/*.jpeg.pdf
 bin/
 obj/
