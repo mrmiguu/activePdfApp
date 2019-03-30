@@ -29,15 +29,34 @@ namespace activePdfApp.Pages
         public string PDF = "";
         //
         // Summary:
+        //     The error message for no uploading the correct file type.
+        public string PDFError = "";
+        //
+        // Summary:
         //     The main handler for on-upload actions of image files.
         public async Task<IActionResult> OnPostAsync()
         {
-            Console.WriteLine($"Uploaded Image: {Image.Name()}");
+            var name = Image.Name();
+            
+            var lower = name.ToLower();
+            var isPNG = lower.EndsWith(".png");
+            var isJPG = lower.EndsWith(".jpg") || lower.EndsWith(".jpeg");
+            var isTIF = lower.EndsWith(".tif") || lower.EndsWith(".tiff");
+            var isBMP = lower.EndsWith(".bmp");
+            var isGIF = lower.EndsWith(".gif");
+            
+            Console.WriteLine($"Uploaded Image: {name}");
+
+            if (!(isPNG || isJPG || isTIF || isBMP || isGIF))
+            {
+                PDFError = $"\"{name}\" is not an image";
+                return Page();
+            }
 
             var TK = new APToolkitNET.Toolkit();
 
             var imageFile = await SaveFile(Image);
-            var pdf = $"{Image.Name()}.pdf";
+            var pdf = $"{name}.pdf";
             var res = TK.ImageToPDF(imageFile, $"wwwroot/uploads/{pdf}");
 
             Console.WriteLine($"TK.ImageToPDF = {res}");
@@ -53,10 +72,12 @@ namespace activePdfApp.Pages
         {
             if (file.Length == 0) return "";
 
-            using (var fileStream = new FileStream($"wwwroot/uploads/{file.Name()}", FileMode.Create))
+            var name = file.Name();
+
+            using (var fileStream = new FileStream($"wwwroot/uploads/{name}", FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);
-                return $"wwwroot/uploads/${file.Name()}";
+                return $"wwwroot/uploads/${name}";
             }
         }
     }
