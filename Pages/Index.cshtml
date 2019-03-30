@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<script>
+  function onSubmit(form) {
+    form.submit();
+  }
+</script>
+
+<div class="text-center">
+  <h1 class="display-4">
+    @if (Model.PDF.Length > 0)
+    {
+      @Model.PDF
+    }
+    else
+    {
+      <span>Howdy</span>
+    }
+  </h1>
+
+  <form
+    method="post"
+    enctype="multipart/form-data"
+    class="post-container"
+  >
+    <input
+      type="file"
+      asp-for="Image"
+      onchange="onSubmit(this.form)"
+      class="upload"
+    />
+  </form>
+
+  <p>Learn about <a href="https://activepdf.com">using ActivePDF</a>.</p>
+</div>
