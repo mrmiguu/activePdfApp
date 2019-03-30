@@ -29,7 +29,7 @@ namespace activePdfApp.Pages
         public string PDF = "";
         //
         // Summary:
-        //     The error message for no uploading the correct file type.
+        //     The error message for not uploading the correct file type.
         public string PDFError = "";
         //
         // Summary:
